@@ -19,6 +19,7 @@
 
 ## Code Review
 
+##### src/api/beer_api_requests.js- No front end validation of values is performed before sending requests to the server.
 ##### src/component/BeerItem.vue - Would be a better user experience to use something like star icons that appear to fill up as you hover over them to submit a rating instead of using a radio selector.
 ##### src/component/BeerItem.vue - No visual indicator of createRating success or error displayed to user
 ##### src/App.vue - Email address should not be hardcoded
