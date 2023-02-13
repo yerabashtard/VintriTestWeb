@@ -3,7 +3,7 @@
 ### Front end server used for displaying and rating beers!
 
 ## Quick notes
-##### - Run npm install from the root directly to get all required packages.
+##### - Run npm install from the root directory to get all required packages.
 ##### - The src/api/config.js file should be updated to ensure the correct location of the Beer Server is configured before starting.
 ##### - The port that the server runs on can be changed using 'port' in the src/vue.config.js file.
 ##### - The server can be started using the 'npm run serve' command from the root directory.
