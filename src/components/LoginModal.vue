@@ -74,5 +74,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  #login-modal {
+    button {
+      color: white;
+    }
+  }
 </style>

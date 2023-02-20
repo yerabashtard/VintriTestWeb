@@ -7,7 +7,8 @@
       :name="beer.name"
       :description="beer.description"
       :first_brewed="beer.first_brewed"
-      :food_pairing="beer.food_pairing"
+      :food_pairings="beer.food_pairing"
+      :image_url="beer.image_url"
       />
   </div>
 </template>

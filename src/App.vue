@@ -8,7 +8,7 @@
       <div class="navigation__user">
         <div v-if=isAuthenticated class="navigation__authenticated">
           {{ user.email }}
-          <button @click="authStore.logout()" >
+          <button class="btn btn-primary" @click="authStore.logout()" >
             logout
           </button>
         </div>
@@ -69,6 +69,10 @@
 
       .navigation__user {
         font-weight: bold;
+
+        button {
+          color: white;
+        }
       }
     }
   }
