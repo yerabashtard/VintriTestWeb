@@ -1,32 +1,44 @@
 <template>
   <div id="app">
+    <LoginModal />
     <nav>
       <div class="navigation__logo">
         Better Beer Bureau
       </div>
       <div class="navigation__user">
-        {{ state.user.email }}
+        <div v-if=isAuthenticated class="navigation__authenticated">
+          {{ user.email }}
+          <button @click="authStore.logout()" >
+            logout
+          </button>
+        </div>
+        <div v-else >
+          <button class="btn btn-primary" @click="authStore.showLoginModal()">
+            Login
+          </button>
+        </div>
       </div>
     </nav>
-    <BeerSearchPanel :email="state.user.email" />
+    <BeerSearchPanel />
   </div>
 </template>
 
 <script>
-  import { reactive } from 'vue'
-  import BeerSearchPanel from './components/BeerSearchPanel'
+  import { storeToRefs } from 'pinia'
+  import { useAuthStore } from '@/store/auth'
+  import BeerSearchPanel from '@/components/BeerSearchPanel'
+  import LoginModal from '@/components/LoginModal.vue'
+
   export default {
     name: 'App',
-    components: { BeerSearchPanel },
+    components: { BeerSearchPanel, LoginModal },
     setup() {
-      const state = reactive({
-        user: {
-          email: 'testuser@testing.com'
-        }
-      })
-
+      const authStore = useAuthStore()
+      const { isAuthenticated, user } = storeToRefs(authStore)
       return {
-        state
+        user,
+        isAuthenticated,
+        authStore
       }
     }
   }

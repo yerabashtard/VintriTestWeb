@@ -46,7 +46,7 @@
         </div>
 
         <button
-          @click="createRating(email, id, state.comments, state.selected)"
+          @click="createRating(id, state.comments, state.selected)"
           :disabled="state.disableButton"
         >
           Submit Rating
@@ -67,15 +67,12 @@
 </template>
 
 <script>
+  import { useAuthStore } from '@/store/auth'
   import BeerRequests from './../api/beer_api_requests'
   import { reactive } from 'vue'
   export default {
     name: 'BeerItem',
     props: {
-      email: {
-        type: String,
-        required: true
-      },
       id: {
         type: Number,
         required: true
@@ -109,18 +106,18 @@
       /**
        * Send this rating to the Beer Server to be saved.
        *
-       * @param email - Email address of the user making the request
        * @param id - Id of the beer being rated
        * @param comments - Optional parameter for any comments that should be added to the rating
        * @param rating - Rating given. Must be a number between 1 and 5 inclusive
        * @returns {Promise<void>}
        */
-      const createRating = async (email, id, comments, rating) => {
+      const createRating = async (id, comments, rating) => {
         // Prevent double clicks and duplicate requests
         state.disableButton = true
         const body = { rating: rating, comments: comments }
         try {
-          await BeerRequests.createRating(email, id, body)
+          const authStore = useAuthStore()
+          await BeerRequests.createRating(authStore?.user?.email, id, body)
         } catch (err) {
           console.error(`Could not send ratings request. Reason: ${err.response?.data?.toString()}`)
           state.error = true
