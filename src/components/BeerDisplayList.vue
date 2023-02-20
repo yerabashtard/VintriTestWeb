@@ -1,6 +1,6 @@
 <template>
   <div class="beer-display-list__wrapper">
-    <BeerItem :email="email"
+    <BeerItem
       v-for="beer in beers"
       :key="beer.id"
       :id="beer.id"
@@ -18,10 +18,6 @@
     name: 'BeerDisplayList',
     components: { BeerItem },
     props: {
-      email: {
-        type: String,
-        required: true
-      },
       beers: {
         type: Array,
         required: true
